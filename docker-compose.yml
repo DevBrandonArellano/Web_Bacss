@@ -1,0 +1,40 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  # Servicio para la aplicación web de BACSS (Next.js)
+  bacss-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bacss_web_app
+    ports:
+      - "3000:3000"
+    networks:
+      - bacss-net
+    restart: unless-stopped
+    depends_on:
+      - ollama
+
+  # Servicio para el motor de IA (Ollama)
+  ollama:
+    image: ollama/ollama
+    container_name: ollama_service
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - bacss-net
+    restart: unless-stopped
+
+# Define la red para que los contenedores se comuniquen entre sí
+networks:
+  bacss-net:
+    driver: bridge
+
+# Define el volumen para persistir los modelos de Ollama
+volumes:
+  ollama_data:
+    driver: local
