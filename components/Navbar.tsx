@@ -14,6 +14,7 @@ const Navbar = () => {
 
   const navLinks = (
     <>
+      <Link href="/consultoria" className="hover:text-bacss-gold transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Consultoría</Link>
       <Link href="/#servicios" className="hover:text-bacss-gold transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Servicios</Link>
       <Link href="/#nosotros" className="hover:text-bacss-gold transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Nosotros</Link>
       <Link href="/#contacto" className="hover:text-bacss-gold transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Contacto</Link>

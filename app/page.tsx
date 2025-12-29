@@ -11,25 +11,60 @@ import { FaqSection } from '@/components/FaqSection';
 import { ContactSection } from '@/components/ContactSection';
 
 // A simple, reusable animated sphere for visual flair
-const AnimatedSphere = () => (
-    <motion.div 
-        className="w-64 h-64 md:w-96 md:h-96 rounded-full"
-        style={{
-            background: 'linear-gradient(180deg, #b89b5e 0%, #1a1a1a 100%)'
-        }}
-        animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 360, 0],
-            y: [0, 20, 0]
-        }}
-        transition={{
-            duration: 15,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-        }}
-    />
-);
+const AnimatedSphere = () => {
+    return (
+        <div className="relative w-64 h-64 md:w-96 md:h-96 flex items-center justify-center">
+            {/* Base static glow */}
+            <div className="absolute w-full h-full bg-bacss-gold/20 rounded-full blur-2xl"></div>
+
+            {/* Core rotating element */}
+            <motion.div
+                className="absolute w-3/4 h-3/4 rounded-full"
+                style={{
+                    border: '2px solid rgba(184, 155, 94, 0.5)',
+                }}
+                animate={{
+                    rotate: 360,
+                }}
+                transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear"
+                }}
+            />
+
+            {/* Outer orbiting element */}
+            <motion.div
+                className="absolute w-full h-full rounded-full"
+                style={{
+                    border: '1px dashed rgba(184, 155, 94, 0.3)',
+                }}
+                animate={{
+                    rotate: -360,
+                }}
+                transition={{
+                    duration: 40,
+                    repeat: Infinity,
+                    ease: "linear"
+                }}
+            />
+            
+            {/* Pulsing center */}
+            <motion.div
+                className="absolute w-1/4 h-1/4 bg-bacss-gold rounded-full"
+                animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.8, 1, 0.8],
+                }}
+                transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
+            />
+        </div>
+    );
+};
 
 
 const ServiceCard = ({ icon, title, children }: { icon: React.ReactNode, title: string, children: React.ReactNode }) => {
